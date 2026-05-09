@@ -1,0 +1,164 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "affa6a0d-0f3c-488b-a83d-e2109896a054",
+      "name": "When chat message received",
+      "webhookId": "1a5c4bcc-0364-45c0-afea-ee23e8289dee"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c003c424-8b1a-462a-8fc7-3b9a195f1137",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        272
+      ],
+      "id": "f19de978-3921-4f30-941b-d85c8960ea45",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        544,
+        208
+      ],
+      "id": "07c4eae4-a0a0-42a4-a7ea-b0b7cb9d2a8a",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        352,
+        176
+      ],
+      "id": "ad6f90c9-41f9-4f8b-b7cc-1ba321e3f84f",
+      "name": "Search in Tavily",
+      "credentials": {
+        "tavilyApi": {
+          "id": "7Q4idmsR3RBXi8I7",
+          "name": "Tavily account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "c3fed293-ff7e-4521-bc08-c397651ac49d",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "rWwufkrx7jmHfHo9",
+          "name": "Groq account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search in Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3d127fd8-8e01-4989-adfe-81b2d52fc683",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "67d9aa6247ad4ec76ff435cd37dadc10bf75a4c9149476ff8d12e3b433c68e12"
+  },
+  "id": "juYMaIG8YkJ39QOH",
+  "tags": []
+}
